@@ -1,0 +1,35 @@
+name: Publish downloads
+on:
+  push:
+    branches: [main]
+    paths: [latest.json]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: publish-downloads
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create download release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          VERSION=$(jq -r '.version' latest.json)
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit 1
+          mkdir -p upload
+          cp "bundles/windward-tales-$VERSION.zip" upload/
+          cp windward-tales.apk "upload/windward-tales-$VERSION.apk"
+          cp SHA256SUMS.txt latest.json upload/
+          (cd upload && sha256sum --check SHA256SUMS.txt)
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            test "$(gh release view "v$VERSION" --json isDraft --jq .isDraft)" = true
+          else
+            gh release create "v$VERSION" --draft --target "$GITHUB_SHA" --title "风行物语 $VERSION" --notes "安卓安装包与游戏热更新包。下载 APK 安装；已安装的正式版会自动检查兼容的游戏更新。"
+          fi
+          gh release upload "v$VERSION" upload/* --clobber
+          gh release edit "v$VERSION" --draft=false --latest
