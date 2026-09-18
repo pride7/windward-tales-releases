@@ -1,2 +1,2 @@
-9300a51fef190a442c6fed0c03c6c0baec3f034d96c2c5ffea2e9c6c0d996533  windward-tales-0.1.6.zip
-a294604443897cdd6954cd8eafb6ea16db1d3efaacf270d3ca3da2077875bbdd  windward-tales-0.1.6.apk
+feab0919cba6c3c730da11cf3022b8d6c46c7586e5e65b972c123083102596fb  windward-tales-0.1.7.zip
+428b1de42b57350013d57a5e6f9b72fc258026b3ab614e21dbd57b85b6601500  windward-tales-0.1.7.apk
