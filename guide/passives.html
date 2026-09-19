@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>职业被动 · 风行物语图鉴</title>
+<meta name="description" content="风行物语的职业、技能、装备与敌人数据，由游戏本体在每次发布时自动生成。" />
+<style>
+:root {
+  --surface-page: #e3eddd;
+  --surface-hollow: #eaf0e1;
+  --surface-sunken: #deead5;
+  --surface-soft: #f2f6eb;
+  --surface-paper: #f9fbf5;
+  --surface-raised: #ffffff;
+  --surface-warm: #f1eddc;
+  --surface-cool: #e6e9f4;
+  --line-soft: #d1ddc8;
+  --line-mid: #c1d1b4;
+  --line-strong: #b3c39d;
+  --ink: #304638;
+  --ink-muted: #5d6d5f;
+  --ink-soft: #7d8a72;
+  --ink-invert: #ffffff;
+  --accent-deep: #42603b;
+  --accent: #547246;
+  --accent-mid: #63824e;
+  --accent-light: #7d9d6c;
+  --accent-pale: #9db68b;
+  --mint: #397052;
+  --sage-deep: #617654;
+  --sage-mid: #879779;
+  --gold: #866225;
+  --gold-deep: #8a662a;
+  --gold-mid: #92713c;
+  --gold-light: #ab915c;
+  --gold-pale: #b3975a;
+  --gold-tint: #eee4c9;
+  --gold-bright: #8a5c15;
+  --gold-sand: #d7c495;
+  --surface-cream: #faf0e6;
+  --danger: #a34f3b;
+  --clay-soft: #a1634d;
+  --info: #3b6983;
+  --info-soft: #507a89;
+  --abyss-tint: #e3e7f5;
+  --abyss-pale: #c9cee3;
+  --abyss-line: #b7bdd6;
+  --abyss-mid: #7f8cbf;
+  --abyss: #4d5a86;
+  --abyss-deep: #3f4a75;
+  --rarity-common: #52634d;
+  --rarity-rare: #356982;
+  --rarity-epic: #79549a;
+  --rarity-legendary: #a8681c;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--surface-page); color: var(--ink);
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif; line-height: 1.75; }
+a { color: var(--mint); }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 18px 72px; }
+header.top { background: var(--surface-paper); border-bottom: 1px solid var(--line-mid); padding: 18px 0; margin-bottom: 26px; }
+header.top .wrap { padding-bottom: 0; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+header.top h1 { font-family: "Songti SC", "Noto Serif SC", serif; font-size: 25px; letter-spacing: 2px; margin: 0; }
+header.top .built { color: var(--ink-muted); font-size: 12px; margin-left: auto; }
+nav.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 28px; }
+nav.tabs a { display: inline-block; padding: 7px 14px; border: 1px solid var(--line-mid); border-radius: 999px;
+  background: var(--surface-paper); color: var(--ink-muted); text-decoration: none; font-size: 14px; }
+nav.tabs a.on { background: var(--accent); border-color: var(--accent); color: var(--ink-invert); }
+h2 { font-family: "Songti SC", "Noto Serif SC", serif; font-size: 21px; letter-spacing: 1px;
+  margin: 34px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line-soft); }
+h3 { font-size: 16px; margin: 22px 0 10px; }
+p.lead { color: var(--ink-muted); margin: 0 0 18px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 12px 0 22px; background: var(--surface-paper);
+  border: 1px solid var(--line-soft); border-radius: 10px; overflow: hidden; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line-wash); vertical-align: top; }
+th { background: var(--surface-soft); font-weight: 600; font-size: 13px; color: var(--ink-muted); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); margin: 14px 0 24px; }
+.card { background: var(--surface-paper); border: 1px solid var(--line-soft); border-radius: 12px; padding: 15px 16px; }
+.card h3 { margin: 0 0 6px; display: flex; align-items: baseline; gap: 8px; }
+.card .tag { font-size: 12px; color: var(--ink-muted); font-weight: 400; }
+.card p { margin: 6px 0 0; font-size: 14px; }
+.card dl { margin: 10px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: 13px; }
+.card dt { color: var(--ink-muted); }
+.card dd { margin: 0; }
+.note { background: var(--surface-soft); border-left: 3px solid var(--gold-light); padding: 11px 14px;
+  border-radius: 0 8px 8px 0; color: var(--ink-muted); font-size: 14px; margin: 14px 0 22px; }
+.variant { color: var(--gold); font-weight: 600; }
+.muted { color: var(--ink-muted); }
+footer { color: var(--ink-muted); font-size: 13px; border-top: 1px solid var(--line-soft); padding-top: 18px; margin-top: 40px; }
+@media (max-width: 620px) { table { font-size: 13px; } th, td { padding: 8px 9px; } }
+
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><h1>风行物语 · 图鉴</h1><span class="built">数据随 v0.2.0-ota10 自动生成</span></div></header>
+<div class="wrap">
+<nav class="tabs"><a href="index.html">职业与属性</a><a href="skills.html">技能</a><a href="passives.html" class="on">职业被动</a><a href="gear.html">装备</a><a href="enemies.html">敌人与关卡</a><a href="endgame.html">远行与深渊</a></nav>
+<h2>职业被动</h2>
+<p class="lead">5 级起可花 1 技能点学习，最多同时携带 2 项，随时免费退还。被动不占技能携带栏。</p>
+<h3>战士</h3>
+<table><thead><tr><th>被动</th><th>效果</th><th>用法</th></tr></thead><tbody>
+<tr><td><strong>坚壁</strong></td><td>护盾未破时，你造成的伤害提高 25%。</td><td><span class="muted">战吼开场，贴身硬打。</span></td></tr>
+<tr><td><strong>碎甲</strong></td><td>攻击破甲目标必定暴击。</td><td><span class="muted">旋风斩或穿刺后接重击。</span></td></tr>
+<tr><td><strong>血怒</strong></td><td>击杀敌人回复 8% 最大生命；处决击杀时再回复 8%。</td><td><span class="muted">处决收割流。</span></td></tr>
+<tr><td><strong>血战</strong></td><td>对流血目标造成的伤害提高 20%。</td><td><span class="muted">撕裂或放血流。</span></td></tr>
+<tr><td><strong>不动如山</strong></td><td>护盾未破时，受到的伤害降低 20%。</td><td><span class="muted">战吼、壁垒、守望誓约。</span></td></tr>
+<tr><td><strong>压制</strong></td><td>攻击眩晕或冻结的敌人时伤害提高 25%。</td><td><span class="muted">震地、盾击、时滞之后。</span></td></tr>
+</tbody></table>
+<h3>游侠</h3>
+<table><thead><tr><th>被动</th><th>效果</th><th>用法</th></tr></thead><tbody>
+<tr><td><strong>追风</strong></td><td>每第 2 次普通攻击追加 60% 攻击的必中伤害。</td><td><span class="muted">少技能、多普攻。</span></td></tr>
+<tr><td><strong>淬毒</strong></td><td>普通攻击对中毒目标的伤害提高 30%。</td><td><span class="muted">毒箭铺毒后压血，再引爆。</span></td></tr>
+<tr><td><strong>猎手</strong></td><td>专注状态下的必定暴击，暴击伤害再提高 50%。</td><td><span class="muted">翻滚接穿刺箭或狙击。</span></td></tr>
+<tr><td><strong>放血</strong></td><td>暴击使目标流血 2 回合：每回合受到 30% 攻击的伤害。</td><td><span class="muted">堆暴击，翻滚专注。</span></td></tr>
+<tr><td><strong>游猎</strong></td><td>攻击 2 格以外的敌人时伤害提高 15%。</td><td><span class="muted">狙击、翻滚拉扯、站高地。</span></td></tr>
+<tr><td><strong>毒性沉积</strong></td><td>普通攻击命中中毒目标时，毒伤持续时间 +1 回合，最多 5 回合。</td><td><span class="muted">毒箭铺毒后用普攻续毒。</span></td></tr>
+</tbody></table>
+<h3>法师</h3>
+<table><thead><tr><th>被动</th><th>效果</th><th>用法</th></tr></thead><tbody>
+<tr><td><strong>术式屏障</strong></td><td>每次施放技能获得 8% 最大生命的护盾，不叠加。</td><td><span class="muted">高频施法。</span></td></tr>
+<tr><td><strong>冻脉</strong></td><td>技能对冻结目标的伤害提高 30%。</td><td><span class="muted">冰霜新星接碎冰或闪电链。</span></td></tr>
+<tr><td><strong>余烬</strong></td><td>易伤目标死亡时，对其相邻敌人造成 100% 攻击伤害。</td><td><span class="muted">火球术清群。</span></td></tr>
+<tr><td><strong>引燃</strong></td><td>技能命中易伤目标时使其燃烧 2 回合：每回合受到 30% 攻击的伤害。</td><td><span class="muted">火球术上易伤，再用任何技能点燃。</span></td></tr>
+<tr><td><strong>余寒</strong></td><td>冻结标记的持续时间 +1 回合。</td><td><span class="muted">冰霜新星、陷阱箭之后接碎冰或闪电链。</span></td></tr>
+<tr><td><strong>法力涌动</strong></td><td>每施放 3 次技能，下一次技能命中的伤害提高 50%。</td><td><span class="muted">奥术弹刷次数，把加成留给陨石或火球。</span></td></tr>
+</tbody></table>
+<h3>召唤师</h3>
+<table><thead><tr><th>被动</th><th>效果</th><th>用法</th></tr></thead><tbody>
+<tr><td><strong>群首</strong></td><td>每有一个召唤物，你造成的伤害提高 6%，最多 24%。</td><td><span class="muted">先铺场再输出，顺序反了就亏。</span></td></tr>
+<tr><td><strong>铸魂</strong></td><td>召唤物的生命与攻击提高 20%。</td><td><span class="muted">召唤流的通用强化。</span></td></tr>
+<tr><td><strong>长驻</strong></td><td>召唤物的持续时间延长 3 回合。</td><td><span class="muted">少花技能补场，多腾手放灵弹。</span></td></tr>
+<tr><td><strong>灵护</strong></td><td>召唤物倒下时，你获得 10% 最大生命的护盾。</td><td><span class="muted">前排被清掉时的兜底。</span></td></tr>
+<tr><td><strong>血契</strong></td><td>召唤物命中敌人时，你回复 8% 最大生命。</td><td><span class="muted">帮手越多，回得越快。</span></td></tr>
+<tr><td><strong>军团</strong></td><td>召唤物上限 +1。</td><td><span class="muted">配合群召把场面彻底铺满。</span></td></tr>
+</tbody></table>
+<h3>刺客</h3>
+<table><thead><tr><th>被动</th><th>效果</th><th>用法</th></tr></thead><tbody>
+<tr><td><strong>伺机</strong></td><td>对满血的敌人造成的伤害提高 25%。</td><td><span class="muted">每波开场先挑没受伤的目标下手。</span></td></tr>
+<tr><td><strong>血嗅</strong></td><td>攻击流血的敌人时有 25% 概率必定暴击。</td><td><span class="muted">先挂流血再输出，顺序反了就亏。</span></td></tr>
+<tr><td><strong>深创</strong></td><td>流血伤害提高 40%，对流血目标的伤害再提高 15%。</td><td><span class="muted">流血流的核心，配合剜心收割。</span></td></tr>
+<tr><td><strong>影舞</strong></td><td>躲开一次攻击后立刻进入专注，下一记技能必定暴击。</td><td><span class="muted">堆闪避，把挨打变成输出机会。</span></td></tr>
+<tr><td><strong>连杀</strong></td><td>击败敌人时所有技能冷却减少 1 回合。</td><td><span class="muted">刺杀击杀本就重置冷却，连起来很快。</span></td></tr>
+<tr><td><strong>致命</strong></td><td>暴击伤害提高 30%。</td><td><span class="muted">暴击率堆够之后的下一步。</span></td></tr>
+</tbody></table>
+<h3>德鲁伊</h3>
+<table><thead><tr><th>被动</th><th>效果</th><th>用法</th></tr></thead><tbody>
+<tr><td><strong>棘甲</strong></td><td>反伤伤害提高 100%。</td><td><span class="muted">堆反伤词条，站着让敌人自己撞。</span></td></tr>
+<tr><td><strong>常青</strong></td><td>每回合的自然回复翻倍。</td><td><span class="muted">体质越高收益越大，长局尤其明显。</span></td></tr>
+<tr><td><strong>蔓毒</strong></td><td>中毒每回合的伤害提高 30%。</td><td><span class="muted">孢子云铺满全场时收益最高。</span></td></tr>
+<tr><td><strong>韧性</strong></td><td>受到伤害后，若生命低于 50%，回复 3% 最大生命。</td><td><span class="muted">残血时的兜底，和回春叠着用。</span></td></tr>
+<tr><td><strong>播种</strong></td><td>中毒的敌人被击败时，它相邻的敌人也会中毒。</td><td><span class="muted">毒能自己传开，越打人越多越省技能。</span></td></tr>
+<tr><td><strong>野蛮生长</strong></td><td>每有一名中毒的敌人，你造成的伤害提高 5%，最多 25%。</td><td><span class="muted">先铺毒再输出，顺序反了就亏。</span></td></tr>
+</tbody></table>
+<footer>本站全部内容由游戏数据在构建时生成，改动平衡或新增职业后会随下一次发布同步更新，不存在过期的手写表格。<br />
+<a href="../">← 回到游戏</a></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>敌人与关卡 · 风行物语图鉴</title>
+<meta name="description" content="风行物语的职业、技能、装备与敌人数据，由游戏本体在每次发布时自动生成。" />
+<style>
+:root {
+  --surface-page: #e3eddd;
+  --surface-hollow: #eaf0e1;
+  --surface-sunken: #deead5;
+  --surface-soft: #f2f6eb;
+  --surface-paper: #f9fbf5;
+  --surface-raised: #ffffff;
+  --surface-warm: #f1eddc;
+  --surface-cool: #e6e9f4;
+  --line-soft: #d1ddc8;
+  --line-mid: #c1d1b4;
+  --line-strong: #b3c39d;
+  --ink: #304638;
+  --ink-muted: #5d6d5f;
+  --ink-soft: #7d8a72;
+  --ink-invert: #ffffff;
+  --accent-deep: #42603b;
+  --accent: #547246;
+  --accent-mid: #63824e;
+  --accent-light: #7d9d6c;
+  --accent-pale: #9db68b;
+  --mint: #397052;
+  --sage-deep: #617654;
+  --sage-mid: #879779;
+  --gold: #866225;
+  --gold-deep: #8a662a;
+  --gold-mid: #92713c;
+  --gold-light: #ab915c;
+  --gold-pale: #b3975a;
+  --gold-tint: #eee4c9;
+  --gold-bright: #8a5c15;
+  --gold-sand: #d7c495;
+  --surface-cream: #faf0e6;
+  --danger: #a34f3b;
+  --clay-soft: #a1634d;
+  --info: #3b6983;
+  --info-soft: #507a89;
+  --abyss-tint: #e3e7f5;
+  --abyss-pale: #c9cee3;
+  --abyss-line: #b7bdd6;
+  --abyss-mid: #7f8cbf;
+  --abyss: #4d5a86;
+  --abyss-deep: #3f4a75;
+  --rarity-common: #52634d;
+  --rarity-rare: #356982;
+  --rarity-epic: #79549a;
+  --rarity-legendary: #a8681c;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--surface-page); color: var(--ink);
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif; line-height: 1.75; }
+a { color: var(--mint); }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 18px 72px; }
+header.top { background: var(--surface-paper); border-bottom: 1px solid var(--line-mid); padding: 18px 0; margin-bottom: 26px; }
+header.top .wrap { padding-bottom: 0; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+header.top h1 { font-family: "Songti SC", "Noto Serif SC", serif; font-size: 25px; letter-spacing: 2px; margin: 0; }
+header.top .built { color: var(--ink-muted); font-size: 12px; margin-left: auto; }
+nav.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 28px; }
+nav.tabs a { display: inline-block; padding: 7px 14px; border: 1px solid var(--line-mid); border-radius: 999px;
+  background: var(--surface-paper); color: var(--ink-muted); text-decoration: none; font-size: 14px; }
+nav.tabs a.on { background: var(--accent); border-color: var(--accent); color: var(--ink-invert); }
+h2 { font-family: "Songti SC", "Noto Serif SC", serif; font-size: 21px; letter-spacing: 1px;
+  margin: 34px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line-soft); }
+h3 { font-size: 16px; margin: 22px 0 10px; }
+p.lead { color: var(--ink-muted); margin: 0 0 18px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 12px 0 22px; background: var(--surface-paper);
+  border: 1px solid var(--line-soft); border-radius: 10px; overflow: hidden; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line-wash); vertical-align: top; }
+th { background: var(--surface-soft); font-weight: 600; font-size: 13px; color: var(--ink-muted); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); margin: 14px 0 24px; }
+.card { background: var(--surface-paper); border: 1px solid var(--line-soft); border-radius: 12px; padding: 15px 16px; }
+.card h3 { margin: 0 0 6px; display: flex; align-items: baseline; gap: 8px; }
+.card .tag { font-size: 12px; color: var(--ink-muted); font-weight: 400; }
+.card p { margin: 6px 0 0; font-size: 14px; }
+.card dl { margin: 10px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: 13px; }
+.card dt { color: var(--ink-muted); }
+.card dd { margin: 0; }
+.note { background: var(--surface-soft); border-left: 3px solid var(--gold-light); padding: 11px 14px;
+  border-radius: 0 8px 8px 0; color: var(--ink-muted); font-size: 14px; margin: 14px 0 22px; }
+.variant { color: var(--gold); font-weight: 600; }
+.muted { color: var(--ink-muted); }
+footer { color: var(--ink-muted); font-size: 13px; border-top: 1px solid var(--line-soft); padding-top: 18px; margin-top: 40px; }
+@media (max-width: 620px) { table { font-size: 13px; } th, td { padding: 8px 9px; } }
+
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><h1>风行物语 · 图鉴</h1><span class="built">数据随 v0.2.0-ota10 自动生成</span></div></header>
+<div class="wrap">
+<nav class="tabs"><a href="index.html">职业与属性</a><a href="skills.html">技能</a><a href="passives.html">职业被动</a><a href="gear.html">装备</a><a href="enemies.html" class="on">敌人与关卡</a><a href="endgame.html">远行与深渊</a></nav>
+<h2>敌人</h2>
+<p class="lead">数值为基准值，实际会随关卡、远行区域和深渊层数放大。</p>
+<table><thead><tr><th>敌人</th><th>生命</th><th>攻击</th><th>护甲</th><th>射程</th><th>闪避</th><th>机制</th></tr></thead><tbody>
+<tr><td><strong>小鬼</strong></td><td class="num">14</td><td class="num">5</td><td class="num">0</td><td class="num">1</td><td class="num">10%</td><td><span class="muted">无特殊机制</span></td></tr>
+<tr><td><strong>爆破小鬼</strong></td><td class="num">16</td><td class="num">6</td><td class="num">0</td><td class="num">1</td><td class="num">10%</td><td>死亡时对周围 1 格的所有单位爆炸，别在它旁边收割</td></tr>
+<tr><td><strong>弓手</strong></td><td class="num">18</td><td class="num">7</td><td class="num">0</td><td class="num">3</td><td class="num">8%</td><td><span class="muted">无特殊机制</span></td></tr>
+<tr><td><strong>游击手</strong></td><td class="num">18</td><td class="num">8</td><td class="num">0</td><td class="num">3</td><td class="num">15%</td><td>被近身后先射击再后撤一格，用冲锋、狙击或「逼近敌人」抓住它</td></tr>
+<tr><td><strong>野狼</strong></td><td class="num">20</td><td class="num">7</td><td class="num">0</td><td class="num">1</td><td class="num">20%</td><td><span class="muted">无特殊机制</span></td></tr>
+<tr><td><strong>巫医</strong></td><td class="num">20</td><td class="num">6</td><td class="num">0</td><td class="num">2</td><td class="num">5%</td><td>每回合治疗伤势最重的同伴 15% 生命，先解决它</td></tr>
+<tr><td><strong>萨满</strong></td><td class="num">22</td><td class="num">9</td><td class="num">0</td><td class="num">2</td><td class="num">5%</td><td><span class="muted">无特殊机制</span></td></tr>
+<tr><td><strong>哥布林</strong></td><td class="num">24</td><td class="num">6</td><td class="num">0</td><td class="num">1</td><td class="num">5%</td><td><span class="muted">无特殊机制</span></td></tr>
+<tr><td><strong>盾卫</strong></td><td class="num">45</td><td class="num">8</td><td class="num">16</td><td class="num">1</td><td class="num">0%</td><td>护甲极高，普通攻击几乎打不动，破甲后护甲归零</td></tr>
+<tr><td><strong>兽人</strong></td><td class="num">50</td><td class="num">9</td><td class="num">8</td><td class="num">1</td><td class="num">0%</td><td><span class="muted">无特殊机制</span></td></tr>
+<tr><td><strong>狂战士</strong></td><td class="num">60</td><td class="num">10</td><td class="num">2</td><td class="num">1</td><td class="num">0%</td><td>生命低于一半时狂暴，攻击提高 60% 并加速，要么一口气打死，要么冻住</td></tr>
+<tr><td><strong>巨魔</strong></td><td class="num">80</td><td class="num">12</td><td class="num">5</td><td class="num">1</td><td class="num">0%</td><td><span class="muted">无特殊机制</span></td></tr>
+<tr><td><strong>哥布林王</strong> <span class="tag">首领</span></td><td class="num">160</td><td class="num">13</td><td class="num">6</td><td class="num">1</td><td class="num">5%</td><td>每 3 回合号令周围的哥布林一起冲锋；半血后举盾，2 格外的攻击只造成一半伤害，贴身打或用冲锋</td></tr>
+<tr><td><strong>石甲督军</strong> <span class="tag">首领</span></td><td class="num">190</td><td class="num">13</td><td class="num">14</td><td class="num">1</td><td class="num">0%</td><td>护甲极高，普通攻击几乎无效，必须破甲或用无视护甲的技能；半血后狂暴，攻击提高 60% 并加速</td></tr>
+<tr><td><strong>霜牙母狼</strong> <span class="tag">首领</span></td><td class="num">260</td><td class="num">15</td><td class="num">6</td><td class="num">1</td><td class="num">10%</td><td>每 3 回合召唤 2 只野狼，并每回合治疗伤势最重的同伴 15% 生命；狼群会不断补充，集火母狼比清狼更快</td></tr>
+<tr><td><strong>深渊领主</strong> <span class="tag">首领</span></td><td class="num">340</td><td class="num">17</td><td class="num">10</td><td class="num">2</td><td class="num">5%</td><td>每 4 回合召唤小鬼；半血后停止召唤，射程变为 3、攻击提高 30%，后半段要速战速决</td></tr>
+</tbody></table>
+<h2>常规远征</h2>
+<table><thead><tr><th>关卡</th><th>怪物等级</th><th>波次</th><th>敌人</th></tr></thead><tbody>
+<tr><td><strong>第 1 关 林间空地</strong></td><td class="num">1</td><td class="num">2</td><td>哥布林×5</td></tr>
+<tr><td><strong>第 2 关 碎石坡</strong></td><td class="num">2</td><td class="num">2</td><td>哥布林×4、野狼×2</td></tr>
+<tr><td><strong>第 3 关 狭道</strong></td><td class="num">3</td><td class="num">2</td><td>哥布林×5、弓手×2</td></tr>
+<tr><td><strong>第 4 关 废墟</strong></td><td class="num">4</td><td class="num">2</td><td>弓手×2、哥布林×5、萨满</td></tr>
+<tr><td><strong>第 5 关 哥布林巢穴</strong></td><td class="num">6</td><td class="num">2</td><td>哥布林×5、弓手、哥布林王 <span class="tag">首领关</span></td></tr>
+<tr><td><strong>第 6 关 冰原</strong></td><td class="num">7</td><td class="num">3</td><td>野狼×8、巫医×2、弓手</td></tr>
+<tr><td><strong>第 7 关 峡谷</strong></td><td class="num">8</td><td class="num">3</td><td>兽人×4、哥布林×2、游击手×2、萨满</td></tr>
+<tr><td><strong>第 8 关 祭坛</strong></td><td class="num">10</td><td class="num">3</td><td>萨满×4、哥布林×2、盾卫×2、弓手、兽人、巨魔</td></tr>
+<tr><td><strong>第 9 关 熔岩桥</strong></td><td class="num">12</td><td class="num">3</td><td>兽人、爆破小鬼×3、弓手×3、巨魔×3、萨满</td></tr>
+<tr><td><strong>第 10 关 深渊</strong></td><td class="num">15</td><td class="num">3</td><td>狂战士×2、兽人×3、萨满×2、巨魔、弓手、野狼×2、深渊领主 <span class="tag">首领关</span></td></tr>
+</tbody></table>
+<div class="note">怪物等级决定掉落装备的等级。林野远行与无尽深渊的掉落等级取怪物等级与角色等级中较低的一个，所以深入不会掉出穿不上的装备；深入的回报体现在品质上。</div>
+<footer>本站全部内容由游戏数据在构建时生成，改动平衡或新增职业后会随下一次发布同步更新，不存在过期的手写表格。<br />
+<a href="../">← 回到游戏</a></footer>
+</div>
+</body>
+</html>

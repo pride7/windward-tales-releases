@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>远行与深渊 · 风行物语图鉴</title>
+<meta name="description" content="风行物语的职业、技能、装备与敌人数据，由游戏本体在每次发布时自动生成。" />
+<style>
+:root {
+  --surface-page: #e3eddd;
+  --surface-hollow: #eaf0e1;
+  --surface-sunken: #deead5;
+  --surface-soft: #f2f6eb;
+  --surface-paper: #f9fbf5;
+  --surface-raised: #ffffff;
+  --surface-warm: #f1eddc;
+  --surface-cool: #e6e9f4;
+  --line-soft: #d1ddc8;
+  --line-mid: #c1d1b4;
+  --line-strong: #b3c39d;
+  --ink: #304638;
+  --ink-muted: #5d6d5f;
+  --ink-soft: #7d8a72;
+  --ink-invert: #ffffff;
+  --accent-deep: #42603b;
+  --accent: #547246;
+  --accent-mid: #63824e;
+  --accent-light: #7d9d6c;
+  --accent-pale: #9db68b;
+  --mint: #397052;
+  --sage-deep: #617654;
+  --sage-mid: #879779;
+  --gold: #866225;
+  --gold-deep: #8a662a;
+  --gold-mid: #92713c;
+  --gold-light: #ab915c;
+  --gold-pale: #b3975a;
+  --gold-tint: #eee4c9;
+  --gold-bright: #8a5c15;
+  --gold-sand: #d7c495;
+  --surface-cream: #faf0e6;
+  --danger: #a34f3b;
+  --clay-soft: #a1634d;
+  --info: #3b6983;
+  --info-soft: #507a89;
+  --abyss-tint: #e3e7f5;
+  --abyss-pale: #c9cee3;
+  --abyss-line: #b7bdd6;
+  --abyss-mid: #7f8cbf;
+  --abyss: #4d5a86;
+  --abyss-deep: #3f4a75;
+  --rarity-common: #52634d;
+  --rarity-rare: #356982;
+  --rarity-epic: #79549a;
+  --rarity-legendary: #a8681c;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--surface-page); color: var(--ink);
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif; line-height: 1.75; }
+a { color: var(--mint); }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 18px 72px; }
+header.top { background: var(--surface-paper); border-bottom: 1px solid var(--line-mid); padding: 18px 0; margin-bottom: 26px; }
+header.top .wrap { padding-bottom: 0; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+header.top h1 { font-family: "Songti SC", "Noto Serif SC", serif; font-size: 25px; letter-spacing: 2px; margin: 0; }
+header.top .built { color: var(--ink-muted); font-size: 12px; margin-left: auto; }
+nav.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 28px; }
+nav.tabs a { display: inline-block; padding: 7px 14px; border: 1px solid var(--line-mid); border-radius: 999px;
+  background: var(--surface-paper); color: var(--ink-muted); text-decoration: none; font-size: 14px; }
+nav.tabs a.on { background: var(--accent); border-color: var(--accent); color: var(--ink-invert); }
+h2 { font-family: "Songti SC", "Noto Serif SC", serif; font-size: 21px; letter-spacing: 1px;
+  margin: 34px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line-soft); }
+h3 { font-size: 16px; margin: 22px 0 10px; }
+p.lead { color: var(--ink-muted); margin: 0 0 18px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 12px 0 22px; background: var(--surface-paper);
+  border: 1px solid var(--line-soft); border-radius: 10px; overflow: hidden; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line-wash); vertical-align: top; }
+th { background: var(--surface-soft); font-weight: 600; font-size: 13px; color: var(--ink-muted); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); margin: 14px 0 24px; }
+.card { background: var(--surface-paper); border: 1px solid var(--line-soft); border-radius: 12px; padding: 15px 16px; }
+.card h3 { margin: 0 0 6px; display: flex; align-items: baseline; gap: 8px; }
+.card .tag { font-size: 12px; color: var(--ink-muted); font-weight: 400; }
+.card p { margin: 6px 0 0; font-size: 14px; }
+.card dl { margin: 10px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: 13px; }
+.card dt { color: var(--ink-muted); }
+.card dd { margin: 0; }
+.note { background: var(--surface-soft); border-left: 3px solid var(--gold-light); padding: 11px 14px;
+  border-radius: 0 8px 8px 0; color: var(--ink-muted); font-size: 14px; margin: 14px 0 22px; }
+.variant { color: var(--gold); font-weight: 600; }
+.muted { color: var(--ink-muted); }
+footer { color: var(--ink-muted); font-size: 13px; border-top: 1px solid var(--line-soft); padding-top: 18px; margin-top: 40px; }
+@media (max-width: 620px) { table { font-size: 13px; } th, td { padding: 8px 9px; } }
+
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><h1>风行物语 · 图鉴</h1><span class="built">数据随 v0.2.0-ota10 自动生成</span></div></header>
+<div class="wrap">
+<nav class="tabs"><a href="index.html">职业与属性</a><a href="skills.html">技能</a><a href="passives.html">职业被动</a><a href="gear.html">装备</a><a href="enemies.html">敌人与关卡</a><a href="endgame.html" class="on">远行与深渊</a></nav>
+<h2>林野远行</h2>
+<p class="lead">每区域三战，击败首领后带着强化继续深入。区域依次为 风息林地、碎岩峡谷、寒霜荒原、古代遗迹，之后循环并持续增强。
+强化只在本次远行内生效，等级、金币和装备长期保留。</p>
+<table><thead><tr><th>强化</th><th>路线</th><th>效果</th><th>配合</th></tr></thead><tbody>
+<tr><td><strong>猎手印记</strong></td><td><span class="muted">收割</span></td><td>普通攻击和技能命中生命不高于 35% 的目标时，伤害提高 40%。</td><td><span class="muted">适合收割高生命的首领。</span></td></tr>
+<tr><td><strong>术式屏障</strong></td><td><span class="muted">施法</span></td><td>每次成功施放技能后，获得 8% 最大生命的护盾，不叠加。</td><td><span class="muted">搭配碎风屏障，让小护盾反复触发爆发。</span></td></tr>
+<tr><td><strong>长风之力</strong></td><td><span class="muted">可叠加</span></td><td>本次远行的攻击提高 10%，多次选择加算。</td><td><span class="muted">同时增强普攻、攻击技能与反伤。</span></td></tr>
+<tr><td><strong>常青之躯</strong></td><td><span class="muted">可叠加</span></td><td>本次远行的最大生命提高 12%，多次选择加算。</td><td><span class="muted">同时增强按生命计算的护盾和药水。</span></td></tr>
+<tr><td><strong>灵风感悟</strong></td><td><span class="muted">可叠加</span></td><td>本次远行的技能伤害提高 15%，多次选择加算。</td><td><span class="muted">强化主动技能，适合以技能为核心的搭配。</span></td></tr>
+<tr><td><strong>过载</strong></td><td><span class="muted">构筑</span></td><td>技能冷却缩短 1 回合（最低 1），但每次施放技能失去 6% 最大生命，不会因此倒下。</td><td><span class="muted">配合术式屏障或常青之躯，用生命换出手次数。</span></td></tr>
+<tr><td><strong>孤注一掷</strong></td><td><span class="muted">构筑</span></td><td>攻击提高 50%，最大生命降低 30%。</td><td><span class="muted">适合冻结、眩晕控场或护盾充足的搭配。</span></td></tr>
+<tr><td><strong>双重打击</strong></td><td><span class="muted">构筑</span></td><td>普通攻击命中后，立即对同一目标追加一次 65% 攻击的普通攻击。</td><td><span class="muted">追风连击、吸血和霜刃都按命中次数结算。</span></td></tr>
+<tr><td><strong>苦修</strong></td><td><span class="muted">构筑</span></td><td>本次远行不再携带药水，改为每回合回复 5% 最大生命。</td><td><span class="muted">禁药威胁对你无效；打得越久越占优。</span></td></tr>
+<tr><td><strong>霜刃</strong></td><td><span class="muted">构筑</span></td><td>每第 3 次普通攻击命中，使目标冻结 1 回合。</td><td><span class="muted">冻住狂战士和首领，法师可接碎冰或闪电链。</span></td></tr>
+<tr><td><strong>势如破竹</strong></td><td><span class="muted">构筑</span></td><td>每击杀一名敌人，本场攻击提高 8%，可累计。</td><td><span class="muted">敌人越多越强，精锐哨卡是它的主场。</span></td></tr>
+<tr><td><strong>追风连击</strong></td><td><span class="muted">连击</span></td><td>每第 2 次命中的普通攻击，追加 80% 攻击的必中伤害。</td><td><span class="muted">多用普攻，后撤射击也能积累连击。</span></td></tr>
+<tr><td><strong>荆棘之心</strong></td><td><span class="muted">反击</span></td><td>每次受击（含护盾吸收），向攻击者反弹 40% 攻击的必中伤害。</td><td><span class="muted">护盾吸收伤害时也会触发，适合持久作战。</span></td></tr>
+<tr><td><strong>风之庇护</strong></td><td><span class="muted">护盾</span></td><td>第 1、4、7…回合获得 30% 最大生命的护盾，不叠加。</td><td><span class="muted">三个职业都能获得周期护盾。</span></td></tr>
+<tr><td><strong>回响风暴</strong></td><td><span class="muted">连击进阶</span></td><td>追风连击的追加伤害提高到 140%，并波及目标相邻的敌人。</td><td><span class="muted">与追风连击组合，把普攻变成范围输出。</span></td></tr>
+<tr><td><strong>复苏荆棘</strong></td><td><span class="muted">反击进阶</span></td><td>荆棘之心每次造成伤害后，回复该次伤害 50% 的生命（向上取整）。</td><td><span class="muted">与荆棘之心组合，边承受攻击边恢复。</span></td></tr>
+<tr><td><strong>碎风屏障</strong></td><td><span class="muted">护盾进阶</span></td><td>护盾被击碎时，对自身 2 格内敌人造成 100% 攻击的必中伤害。</td><td><span class="muted">风之庇护、战吼、奥术护盾均可触发。</span></td></tr>
+</tbody></table>
+<h2>无尽深渊</h2>
+<p class="lead">通关第十关后解锁。一层层向下，怪物等级每层 +2，每层带 1～3 条固定词缀，逼你换打法。输了停在本层，赢了记录最深层数。</p>
+<table><thead><tr><th>词缀</th><th>效果</th></tr></thead><tbody>
+<tr><td><strong>禁药</strong></td><td>本场无法使用药水。</td></tr>
+<tr><td><strong>迷雾</strong></td><td>你的攻击射程减少 1 格，最低 1 格。</td></tr>
+<tr><td><strong>迟滞</strong></td><td>你的技能冷却全部延长 1 回合。</td></tr>
+<tr><td><strong>破盾</strong></td><td>你的护盾全部失效。</td></tr>
+<tr><td><strong>腐蚀</strong></td><td>从第 2 回合起，每回合损失 2% 最大生命。</td></tr>
+<tr><td><strong>嗜血</strong></td><td>敌人每次造成伤害，回复该伤害 30% 的生命。</td></tr>
+<tr><td><strong>荆棘</strong></td><td>你每次造成伤害，自身承受其中 15%。</td></tr>
+<tr><td><strong>狂暴</strong></td><td>生命低于一半的敌人伤害提高 50%。</td></tr>
+<tr><td><strong>时限</strong></td><td>必须在限定回合内获胜（30 回合，每层／每区域再加 3），否则视为失败。</td></tr>
+<tr><td><strong>重甲</strong></td><td>所有敌人护甲 +8。</td></tr>
+<tr><td><strong>疾行</strong></td><td>近战敌人每次行动多移动 1 格。</td></tr>
+<tr><td><strong>箭雨</strong></td><td>每一波额外出现 2 名弓手。</td></tr>
+<tr><td><strong>蛮力</strong></td><td>所有敌人攻击 +25%。</td></tr>
+</tbody></table>
+<footer>本站全部内容由游戏数据在构建时生成，改动平衡或新增职业后会随下一次发布同步更新，不存在过期的手写表格。<br />
+<a href="../">← 回到游戏</a></footer>
+</div>
+</body>
+</html>

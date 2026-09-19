@@ -8,20 +8,26 @@
  * or when the player presses 立即更新. Without that message the waiting worker would sit there forever:
  * reloading the page does not release the old worker, so "takes over next launch" was never actually true.
  */
-const CACHE = 'windward-0.2.0-ota9-b70c205abed9';
+const CACHE = 'windward-0.2.0-ota10-25f56d48c142';
 const ASSETS = [
-  "./assets/ArenaScene-BryeFuoV.js",
-  "./assets/index-BTiPq1BD.js",
+  "./assets/ArenaScene-B28IFa5A.js",
+  "./assets/index-BNprVpct.js",
+  "./assets/index-Bbm9bQCH.js",
   "./assets/index-Bw4M2a8W.css",
-  "./assets/index-DCsLxO27.js",
-  "./assets/index-DR5VBQ4q.js",
+  "./assets/index-Cv2cXcjT.js",
   "./assets/phaser-B8p8Giq7.js",
   "./assets/phaser-DFK5Ua9d.js",
-  "./assets/web-DVI0gvjW.js",
-  "./assets/web-ToGt2ZfT.js",
-  "./assets/web-cLNmd_I3.js",
-  "./assets/web-uYqVZ1qL.js",
+  "./assets/web-9QO2XlKt.js",
+  "./assets/web-CuUgAxmg.js",
+  "./assets/web-D44FZ49E.js",
+  "./assets/web-D8VWqZCY.js",
   "./favicon.svg",
+  "./guide/endgame.html",
+  "./guide/enemies.html",
+  "./guide/gear.html",
+  "./guide/index.html",
+  "./guide/passives.html",
+  "./guide/skills.html",
   "./icons/windward-180.png",
   "./icons/windward-192.png",
   "./icons/windward-512.png",
@@ -55,7 +61,15 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   const { request } = event;
-  if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
+  const url = new URL(request.url);
+  if (request.method !== 'GET' || url.origin !== self.location.origin) return;
+  // 图鉴是独立的多页静态站，不能套用游戏的单页外壳，否则打开 /guide/ 会看到游戏本身。
+  // 目录形式的地址要落到具体页面，缓存里存的是 guide/index.html 这样的路径。
+  if (url.pathname.includes('/guide/')) {
+    const key = request.mode === 'navigate' && url.pathname.endsWith('/') ? `${url.href}index.html` : request;
+    event.respondWith(serve(key, request));
+    return;
+  }
   // The game is a single page with no routing, so every navigation resolves to the cached shell.
   event.respondWith(request.mode === 'navigate' ? serve('./index.html', request) : serve(request, request));
 });

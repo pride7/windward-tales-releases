@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>装备 · 风行物语图鉴</title>
+<meta name="description" content="风行物语的职业、技能、装备与敌人数据，由游戏本体在每次发布时自动生成。" />
+<style>
+:root {
+  --surface-page: #e3eddd;
+  --surface-hollow: #eaf0e1;
+  --surface-sunken: #deead5;
+  --surface-soft: #f2f6eb;
+  --surface-paper: #f9fbf5;
+  --surface-raised: #ffffff;
+  --surface-warm: #f1eddc;
+  --surface-cool: #e6e9f4;
+  --line-soft: #d1ddc8;
+  --line-mid: #c1d1b4;
+  --line-strong: #b3c39d;
+  --ink: #304638;
+  --ink-muted: #5d6d5f;
+  --ink-soft: #7d8a72;
+  --ink-invert: #ffffff;
+  --accent-deep: #42603b;
+  --accent: #547246;
+  --accent-mid: #63824e;
+  --accent-light: #7d9d6c;
+  --accent-pale: #9db68b;
+  --mint: #397052;
+  --sage-deep: #617654;
+  --sage-mid: #879779;
+  --gold: #866225;
+  --gold-deep: #8a662a;
+  --gold-mid: #92713c;
+  --gold-light: #ab915c;
+  --gold-pale: #b3975a;
+  --gold-tint: #eee4c9;
+  --gold-bright: #8a5c15;
+  --gold-sand: #d7c495;
+  --surface-cream: #faf0e6;
+  --danger: #a34f3b;
+  --clay-soft: #a1634d;
+  --info: #3b6983;
+  --info-soft: #507a89;
+  --abyss-tint: #e3e7f5;
+  --abyss-pale: #c9cee3;
+  --abyss-line: #b7bdd6;
+  --abyss-mid: #7f8cbf;
+  --abyss: #4d5a86;
+  --abyss-deep: #3f4a75;
+  --rarity-common: #52634d;
+  --rarity-rare: #356982;
+  --rarity-epic: #79549a;
+  --rarity-legendary: #a8681c;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--surface-page); color: var(--ink);
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif; line-height: 1.75; }
+a { color: var(--mint); }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 18px 72px; }
+header.top { background: var(--surface-paper); border-bottom: 1px solid var(--line-mid); padding: 18px 0; margin-bottom: 26px; }
+header.top .wrap { padding-bottom: 0; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+header.top h1 { font-family: "Songti SC", "Noto Serif SC", serif; font-size: 25px; letter-spacing: 2px; margin: 0; }
+header.top .built { color: var(--ink-muted); font-size: 12px; margin-left: auto; }
+nav.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 28px; }
+nav.tabs a { display: inline-block; padding: 7px 14px; border: 1px solid var(--line-mid); border-radius: 999px;
+  background: var(--surface-paper); color: var(--ink-muted); text-decoration: none; font-size: 14px; }
+nav.tabs a.on { background: var(--accent); border-color: var(--accent); color: var(--ink-invert); }
+h2 { font-family: "Songti SC", "Noto Serif SC", serif; font-size: 21px; letter-spacing: 1px;
+  margin: 34px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line-soft); }
+h3 { font-size: 16px; margin: 22px 0 10px; }
+p.lead { color: var(--ink-muted); margin: 0 0 18px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 12px 0 22px; background: var(--surface-paper);
+  border: 1px solid var(--line-soft); border-radius: 10px; overflow: hidden; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line-wash); vertical-align: top; }
+th { background: var(--surface-soft); font-weight: 600; font-size: 13px; color: var(--ink-muted); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); margin: 14px 0 24px; }
+.card { background: var(--surface-paper); border: 1px solid var(--line-soft); border-radius: 12px; padding: 15px 16px; }
+.card h3 { margin: 0 0 6px; display: flex; align-items: baseline; gap: 8px; }
+.card .tag { font-size: 12px; color: var(--ink-muted); font-weight: 400; }
+.card p { margin: 6px 0 0; font-size: 14px; }
+.card dl { margin: 10px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: 13px; }
+.card dt { color: var(--ink-muted); }
+.card dd { margin: 0; }
+.note { background: var(--surface-soft); border-left: 3px solid var(--gold-light); padding: 11px 14px;
+  border-radius: 0 8px 8px 0; color: var(--ink-muted); font-size: 14px; margin: 14px 0 22px; }
+.variant { color: var(--gold); font-weight: 600; }
+.muted { color: var(--ink-muted); }
+footer { color: var(--ink-muted); font-size: 13px; border-top: 1px solid var(--line-soft); padding-top: 18px; margin-top: 40px; }
+@media (max-width: 620px) { table { font-size: 13px; } th, td { padding: 8px 9px; } }
+
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><h1>风行物语 · 图鉴</h1><span class="built">数据随 v0.2.0-ota10 自动生成</span></div></header>
+<div class="wrap">
+<nav class="tabs"><a href="index.html">职业与属性</a><a href="skills.html">技能</a><a href="passives.html">职业被动</a><a href="gear.html" class="on">装备</a><a href="enemies.html">敌人与关卡</a><a href="endgame.html">远行与深渊</a></nav>
+<h2>装备类型</h2>
+<p class="lead">四个槽位，掉落会适配当前职业。装备等级统一为 1、5、10、15…，角色只能穿戴不高于自身等级的装备。</p>
+<table><thead><tr><th>类型</th><th>部位</th><th>可用职业</th><th>名称</th></tr></thead><tbody>
+<tr><td><strong>剑刃</strong></td><td>武器</td><td>战士</td><td><span class="muted">长剑、匕首</span></td></tr>
+<tr><td><strong>战斧</strong></td><td>武器</td><td>战士</td><td><span class="muted">战斧</span></td></tr>
+<tr><td><strong>长枪</strong></td><td>武器</td><td>战士</td><td><span class="muted">长枪</span></td></tr>
+<tr><td><strong>弓弩</strong></td><td>武器</td><td>游侠</td><td><span class="muted">短弓、长弓、轻弩</span></td></tr>
+<tr><td><strong>法杖</strong></td><td>武器</td><td>法师</td><td><span class="muted">法杖、魔杖</span></td></tr>
+<tr><td><strong>藤杖</strong></td><td>武器</td><td>德鲁伊</td><td><span class="muted">藤杖、橡木杖、鹿角杖</span></td></tr>
+<tr><td><strong>短刃</strong></td><td>武器</td><td>刺客</td><td><span class="muted">短刃、袖剑、双刃</span></td></tr>
+<tr><td><strong>符杖</strong></td><td>武器</td><td>召唤师</td><td><span class="muted">符杖、灵偶杖、摄魂铃</span></td></tr>
+<tr><td><strong>重型头盔</strong></td><td>头盔</td><td>战士</td><td><span class="muted">铁盔、面甲</span></td></tr>
+<tr><td><strong>轻型头盔</strong></td><td>头盔</td><td>战士／游侠</td><td><span class="muted">皮帽</span></td></tr>
+<tr><td><strong>布制头饰</strong></td><td>头盔</td><td>全职业通用</td><td><span class="muted">兜帽、冠冕</span></td></tr>
+<tr><td><strong>藤制头饰</strong></td><td>头盔</td><td>游侠／德鲁伊</td><td><span class="muted">藤盔、角冠</span></td></tr>
+<tr><td><strong>夜行头巾</strong></td><td>头盔</td><td>游侠／刺客</td><td><span class="muted">面罩、夜巾</span></td></tr>
+<tr><td><strong>祭冠</strong></td><td>头盔</td><td>法师／召唤师</td><td><span class="muted">祭冠、骨环</span></td></tr>
+<tr><td><strong>重甲</strong></td><td>护甲</td><td>战士</td><td><span class="muted">锁甲、板甲</span></td></tr>
+<tr><td><strong>轻甲</strong></td><td>护甲</td><td>战士／游侠</td><td><span class="muted">皮甲</span></td></tr>
+<tr><td><strong>布甲</strong></td><td>护甲</td><td>全职业通用</td><td><span class="muted">法袍、斗篷</span></td></tr>
+<tr><td><strong>藤甲</strong></td><td>护甲</td><td>游侠／德鲁伊</td><td><span class="muted">藤甲、兽皮衣</span></td></tr>
+<tr><td><strong>夜行衣</strong></td><td>护甲</td><td>游侠／刺客</td><td><span class="muted">夜行衣、暗影护具</span></td></tr>
+<tr><td><strong>祭袍</strong></td><td>护甲</td><td>法师／召唤师</td><td><span class="muted">祭袍、灵纹袍</span></td></tr>
+<tr><td><strong>饰品</strong></td><td>饰品</td><td>全职业通用</td><td><span class="muted">戒指、护符、吊坠、图腾、徽章</span></td></tr>
+</tbody></table>
+<h2>品质</h2>
+<table><thead><tr><th>品质</th><th>数值系数</th><th>随机词条</th><th>售价倍率</th></tr></thead><tbody>
+<tr><td><strong>普通</strong></td><td class="num">1.00</td><td class="num">1 条</td><td class="num">1×</td></tr>
+<tr><td><strong>精良</strong></td><td class="num">1.15</td><td class="num">2 条</td><td class="num">2.2×</td></tr>
+<tr><td><strong>史诗</strong></td><td class="num">1.35</td><td class="num">3 条</td><td class="num">5×</td></tr>
+<tr><td><strong>传奇</strong></td><td class="num">1.60</td><td class="num">3 条</td><td class="num">10×</td></tr>
+</tbody></table>
+<h2>随机词条的取值区间</h2>
+<p class="lead">百分比词条随等级平方根增长，固定数值词条线性增长，再乘品质系数。</p>
+<table><thead><tr><th>词条</th><th>10 级普通</th><th>100 级史诗</th></tr></thead><tbody>
+<tr><td><strong></strong></td><td class="num">1 ~ 3</td><td class="num">7 ~ 16</td></tr>
+<tr><td><strong></strong></td><td class="num">1 ~ 3</td><td class="num">7 ~ 16</td></tr>
+<tr><td><strong></strong></td><td class="num">1 ~ 3</td><td class="num">7 ~ 16</td></tr>
+<tr><td><strong></strong></td><td class="num">1 ~ 3</td><td class="num">7 ~ 16</td></tr>
+<tr><td><strong></strong></td><td class="num">3 ~ 6</td><td class="num">28 ~ 57</td></tr>
+<tr><td><strong></strong></td><td class="num">13 ~ 25</td><td class="num">115 ~ 216</td></tr>
+<tr><td><strong></strong></td><td class="num">2 ~ 6</td><td class="num">3 ~ 39</td></tr>
+<tr><td><strong></strong></td><td class="num">3 ~ 6</td><td class="num">9 ~ 16</td></tr>
+<tr><td><strong></strong></td><td class="num">9 ~ 14</td><td class="num">31 ~ 42</td></tr>
+<tr><td><strong></strong></td><td class="num">2 ~ 4</td><td class="num">7 ~ 12</td></tr>
+<tr><td><strong></strong></td><td class="num">3 ~ 5</td><td class="num">8 ~ 14</td></tr>
+<tr><td><strong></strong></td><td class="num">7 ~ 14</td><td class="num">70 ~ 140</td></tr>
+<tr><td><strong></strong></td><td class="num">2 ~ 4</td><td class="num">5 ~ 9</td></tr>
+<tr><td><strong></strong></td><td class="num">7 ~ 14</td><td class="num">70 ~ 140</td></tr>
+<tr><td><strong></strong></td><td class="num">1</td><td class="num">1 ~ 4</td></tr>
+</tbody></table>
+<h2>两件套套装</h2>
+<table><thead><tr><th>套装</th><th>部位</th><th>效果</th></tr></thead><tbody>
+<tr><td><strong>守望誓约</strong></td><td>头盔 + 护甲</td><td></td></tr>
+<tr><td><strong>逐风旅途</strong></td><td>武器 + 饰品</td><td></td></tr>
+<tr><td><strong>星火回响</strong></td><td>头盔 + 饰品</td><td></td></tr>
+</tbody></table>
+<h2>传奇规则词条</h2>
+<p class="lead">传奇装备除随机词条外额外带一条改变战斗规则的词条，按部位划分。重铸与精炼不会动到它。</p>
+<table><thead><tr><th>规则词条</th><th>部位</th><th>效果</th></tr></thead><tbody>
+<tr><td><strong>连击之刃</strong></td><td>武器</td><td></td></tr>
+<tr><td><strong>斩首者</strong></td><td>武器</td><td></td></tr>
+<tr><td><strong>壁垒</strong></td><td>护甲</td><td></td></tr>
+<tr><td><strong>复仇甲</strong></td><td>护甲</td><td></td></tr>
+<tr><td><strong>先手</strong></td><td>头盔</td><td></td></tr>
+<tr><td><strong>凝神</strong></td><td>头盔</td><td></td></tr>
+<tr><td><strong>命悬一线</strong></td><td>饰品</td><td></td></tr>
+<tr><td><strong>迅捷</strong></td><td>饰品</td><td></td></tr>
+</tbody></table>
+<footer>本站全部内容由游戏数据在构建时生成，改动平衡或新增职业后会随下一次发布同步更新，不存在过期的手写表格。<br />
+<a href="../">← 回到游戏</a></footer>
+</div>
+</body>
+</html>
