@@ -20,7 +20,10 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           VERSION=$(jq -r '.version' latest.json)
-          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit 1
+          # x.y.z 是安装包，x.y.z-otaN 是它之上的第 N 次热更新，两者都要发布：
+          # 热更新没有新 APK，但仍然把同一个 APK 按新版本名放进 Release，SHA256SUMS.txt 里也是这样列的。
+          # 早先这里只认 x.y.z，每次热更新都在这一步 exit 1，包其实已经发出去了却留下一个失败记录。
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-ota[0-9]+)?$ ]] || exit 1
           mkdir -p upload
           cp "bundles/windward-tales-$VERSION.zip" upload/
           cp windward-tales.apk "upload/windward-tales-$VERSION.apk"
