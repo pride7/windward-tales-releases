@@ -8,19 +8,19 @@
  * or when the player presses 立即更新. Without that message the waiting worker would sit there forever:
  * reloading the page does not release the old worker, so "takes over next launch" was never actually true.
  */
-const CACHE = 'windward-0.2.0-ota8-2a7579329591';
+const CACHE = 'windward-0.2.0-ota9-b70c205abed9';
 const ASSETS = [
-  "./assets/ArenaScene-BJRg4ZVI.js",
-  "./assets/index-9A-1TvY1.js",
-  "./assets/index-CJBSOmld.js",
-  "./assets/index-CdDDxc5d.js",
-  "./assets/index-DJiG1sIT.css",
+  "./assets/ArenaScene-BryeFuoV.js",
+  "./assets/index-BTiPq1BD.js",
+  "./assets/index-Bw4M2a8W.css",
+  "./assets/index-DCsLxO27.js",
+  "./assets/index-DR5VBQ4q.js",
   "./assets/phaser-B8p8Giq7.js",
   "./assets/phaser-DFK5Ua9d.js",
-  "./assets/web-BHYtGeSo.js",
-  "./assets/web-D4BGVfRt.js",
-  "./assets/web-TWBYX8zf.js",
-  "./assets/web-dgqIbqkr.js",
+  "./assets/web-DVI0gvjW.js",
+  "./assets/web-ToGt2ZfT.js",
+  "./assets/web-cLNmd_I3.js",
+  "./assets/web-uYqVZ1qL.js",
   "./favicon.svg",
   "./icons/windward-180.png",
   "./icons/windward-192.png",
