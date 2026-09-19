@@ -1,2 +1,2 @@
-286bd44c8844ab15fcf31b99aa850e5869bac0250365b6b1295821efbf5bf7e6  windward-tales-0.2.0-ota9.zip
-07cfe79c6e211ffd34fc7145a736887f707bae86f3c52f3510cb5fb522745be6  windward-tales-0.2.0-ota9.apk
+cd22df1a2cef9f13b0629b9fc31cd2524716ee54e62eca876eaa49f661d1c394  windward-tales-0.2.0-ota10.zip
+08da81767ee6b9669caece379ea5f12b0c6e15d10da89b4b5d0c8117d8ef4337  windward-tales-0.2.0-ota10.apk
