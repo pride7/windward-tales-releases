@@ -5,19 +5,19 @@
  * a new build installs quietly and takes over the next time the game is launched, which is the same
  * promise the Android updater makes: an update never reloads a battle in progress.
  */
-const CACHE = 'windward-0.2.0-ota6-34d6846a159f';
+const CACHE = 'windward-0.2.0-ota7-416fdf618314';
 const ASSETS = [
-  "./assets/ArenaScene-DY4TWhhO.js",
-  "./assets/index-B-1-3eQk.js",
-  "./assets/index-BpjYL1AL.js",
-  "./assets/index-BthoDtVe.js",
-  "./assets/index-BvjTP97m.css",
+  "./assets/ArenaScene-DDcaz3DL.js",
+  "./assets/index-CCKroKUn.js",
+  "./assets/index-CMmezei3.js",
+  "./assets/index-CxLzprpP.js",
+  "./assets/index-DJiG1sIT.css",
   "./assets/phaser-B8p8Giq7.js",
   "./assets/phaser-DFK5Ua9d.js",
-  "./assets/web-B6Xe0daz.js",
-  "./assets/web-BhWBuEIZ.js",
-  "./assets/web-Cd3ukUOf.js",
-  "./assets/web-DjNQL8kc.js",
+  "./assets/web-BFWF50aa.js",
+  "./assets/web-BjPKSRxn.js",
+  "./assets/web-CfYgCs7j.js",
+  "./assets/web-DrmTZKs6.js",
   "./favicon.svg",
   "./icons/windward-180.png",
   "./icons/windward-192.png",
