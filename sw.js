@@ -8,19 +8,19 @@
  * or when the player presses 立即更新. Without that message the waiting worker would sit there forever:
  * reloading the page does not release the old worker, so "takes over next launch" was never actually true.
  */
-const CACHE = 'windward-0.3.0-4c0dfc910cba';
+const CACHE = 'windward-0.3.2-4d1f086c1f15';
 const ASSETS = [
-  "./assets/ArenaScene-C9P9d0g7.js",
-  "./assets/index-C6mQ5BVE.js",
-  "./assets/index-Crkntgm-.js",
-  "./assets/index-DzPKk4tO.css",
-  "./assets/index-UcslVRWl.js",
+  "./assets/ArenaScene-Bcd0t3gL.js",
+  "./assets/index-C4h5m0D0.js",
+  "./assets/index-D_kUVYJK.css",
+  "./assets/index-e_D8ikMi.js",
+  "./assets/index-mYhZDlvA.js",
   "./assets/phaser-B8p8Giq7.js",
   "./assets/phaser-DFK5Ua9d.js",
-  "./assets/web-BqX6naL6.js",
-  "./assets/web-D9X9zJV_.js",
-  "./assets/web-DYBTH-zk.js",
-  "./assets/web-r3YgfaJu.js",
+  "./assets/web-Bmutno4a.js",
+  "./assets/web-DPlCmiSC.js",
+  "./assets/web-DXgFDSvM.js",
+  "./assets/web-zMMDG584.js",
   "./favicon.svg",
   "./guide/builds.html",
   "./guide/endgame.html",
@@ -65,10 +65,15 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   if (request.method !== 'GET' || url.origin !== self.location.origin) return;
   // 图鉴是独立的多页静态站，不能套用游戏的单页外壳，否则打开 /guide/ 会看到游戏本身。
-  // 目录形式的地址要落到具体页面，缓存里存的是 guide/index.html 这样的路径。
-  if (url.pathname.includes('/guide/')) {
-    const key = request.mode === 'navigate' && url.pathname.endsWith('/') ? `${url.href}index.html` : request;
-    event.respondWith(serve(key, request));
+  // 目录形式的地址要落到具体页面，缓存里存的是 guide/index.html 这样的路径；少了结尾斜杠的 /guide
+  // 得先补上斜杠，直接把 index.html 发回去的话，页内的 ../icons 和 skills.html 全会指到上一层去。
+  if (/\/guide(\/|$)/.test(url.pathname)) {
+    const directory = request.mode === 'navigate' && !/\.[^/]+$/.test(url.pathname);
+    if (directory && !url.pathname.endsWith('/')) {
+      event.respondWith(Response.redirect(`${url.origin}${url.pathname}/${url.search}`, 302));
+      return;
+    }
+    event.respondWith(serve(directory ? `${url.origin}${url.pathname}index.html` : request, request));
     return;
   }
   // The game is a single page with no routing, so every navigation resolves to the cached shell.
