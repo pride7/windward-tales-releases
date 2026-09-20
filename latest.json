@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "version": "0.5.0-ota1",
+  "version": "0.5.0-ota2",
   "nativeVersion": "0.5.0",
   "runtimeVersion": "4",
-  "url": "https://raw.githubusercontent.com/pride7/windward-tales-releases/main/bundles/windward-tales-0.5.0-ota1.zip",
-  "checksum": "271b650c2ff206da7f19a6de252afa363a8cc096c0dfe4c14cc8529ce8837247"
+  "url": "https://raw.githubusercontent.com/pride7/windward-tales-releases/main/bundles/windward-tales-0.5.0-ota2.zip",
+  "checksum": "8892af17a88a38db0b88d68cbac98b283147d60ec97e99af7ef64ca77cb457c6"
 }
