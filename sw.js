@@ -8,19 +8,19 @@
  * or when the player presses 立即更新. Without that message the waiting worker would sit there forever:
  * reloading the page does not release the old worker, so "takes over next launch" was never actually true.
  */
-const CACHE = 'windward-0.5.0-ota15-4dcf44b124e8';
+const CACHE = 'windward-0.5.1-168f209b5bc6';
 const ASSETS = [
-  "./assets/ArenaScene-Z9ve5i-K.js",
-  "./assets/index-BuYfDV6Z.css",
-  "./assets/index-C-4Yi4mR.js",
-  "./assets/index-Cmx-gC7x.js",
-  "./assets/index-DJW6-0JZ.js",
+  "./assets/ArenaScene-CTsBSvd4.js",
+  "./assets/index-BYxKlqPj.css",
+  "./assets/index-BjuZ9Qev.js",
+  "./assets/index-DxtIMgnZ.js",
+  "./assets/index-tkUDppXE.js",
   "./assets/phaser-B8p8Giq7.js",
   "./assets/phaser-DFK5Ua9d.js",
-  "./assets/web-CU7rZTFe.js",
-  "./assets/web-DL8CVa8u.js",
-  "./assets/web-DYRfEBek.js",
-  "./assets/web-iQXjcmXc.js",
+  "./assets/web-BkJrC66s.js",
+  "./assets/web-DYrFUGzV.js",
+  "./assets/web-Du-kfB_v.js",
+  "./assets/web-bVy-Kdx7.js",
   "./favicon.svg",
   "./guide/builds.html",
   "./guide/endgame.html",
@@ -38,13 +38,16 @@ const ASSETS = [
   "./portraits/assassin.png",
   "./portraits/druid.png",
   "./portraits/mage.png",
+  "./portraits/necromancer.png",
   "./portraits/ranger.png",
   "./portraits/summoner.png",
   "./portraits/warrior.png"
 ];
 
+// 绕过浏览器的 HTTP 缓存直接向服务器要：GitHub Pages 会让 index.html 缓存十分钟，照常请求可能拿到上一版的
+// index.html，而它引用的带哈希资源在发布时已经删了——新版本就会一直用这份旧外壳白屏，直到下一次发版。
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)));
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS.map(url => new Request(url, { cache: 'reload' })))));
 });
 
 // 页面在安全的时刻（启动，或玩家主动点更新）发来这条消息，等待中的版本才接管。
